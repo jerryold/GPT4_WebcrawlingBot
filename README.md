@@ -1,6 +1,6 @@
 
 # GPT4 Vision Web Crawler Tool
-============================
+
 
 ## Introduction
 This is a tool powered by GPT4 Vision API and Puppeteer that can answer questions based on website screenshots. You ask it a question, and it will browse to a website and take a screenshot. Then, it uses the GPT4 Vision API to answer the question based on the screenshot. The server uses a Flask API to communicate with the client. Users can input a URL and ask a question on the client side, and the server will return the answer to the client side. The client side will then display the answer on the page.
