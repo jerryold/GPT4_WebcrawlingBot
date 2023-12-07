@@ -4,7 +4,7 @@ import base64
 import json
 import os
 
-model = OpenAI(api_key="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")
+model = OpenAI(api_key="your api key")
 model.timeout = 60
 
 def image_b64(image):
