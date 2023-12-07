@@ -38,11 +38,13 @@ $ python3 webcrwalerbot.py
 
 
 
-# Demo Screenshot
-(Add your screenshot here)
+## Demo Screenshot
+![initial screen](https://github.com/jerryold/GPT4_WebcrawlingBot/assets/12774427/a1351f87-e56d-48ee-860c-4b006d3e9b96)
+![response](https://github.com/jerryold/GPT4_WebcrawlingBot/assets/12774427/9d2f3c31-95b0-4e92-8f68-c76c017133c0)
 
-# Demo Video
-(Add your video link here)
+
+## Demo Video
+
 
 ## Packages Introduction-Puppeteer
 Puppeteer is a Node library which provides a high-level API to control Chrome or Chromium over the DevTools Protocol. Puppeteer runs headless by default, but can be configured to run full (non-headless) Chrome or Chromium. 
