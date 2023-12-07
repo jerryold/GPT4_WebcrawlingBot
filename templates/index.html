@@ -1,0 +1,148 @@
+<!-- <html>
+<head>
+    <title>URL Input</title>
+</head>
+<body>
+    <h1>Enter URL and Question</h1>
+    <form method="POST">
+        <label for="url">URL:</label><br>
+        <input type="text" id="url" name="url" required><br>
+        <label for="question">Question:</label><br>
+        <input type="text" id="question" name="question" required><br>
+        <input type="submit" value="Submit">
+    </form>
+    {% if response %}
+    <h1>Result</h1>
+    {{response}}
+    {% endif %}
+</body>
+</html>  -->
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href='/static/main.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Chatbot</title>
+
+   
+</head>
+
+<body>
+   
+
+    
+    <div class="chat_window">
+        <div class="top_menu">
+            <div class="buttons">
+                <div class="button close"></div>
+                <div class="button minimize"></div>
+                <div class="button maximize"></div>
+            </div>
+            <div class="title">WebChatBot</div>
+        </div>
+        <ul class="messages">
+            {% if response %}
+                <li>{{response}}</li>
+            {% endif %}
+        </ul>
+        
+        
+        <div class="bottom_wrapper clearfix">
+            <form method="POST">
+                <div class="message_input_wrapper">
+                   
+                    <input class="message_input" id="url" name="url" placeholder="Type your url here..." required />
+                </div>
+                <div class="message_input_wrapper">
+                    
+                    <input class="message_input" id="question" name="question" placeholder="Type your question you want to ask on this webpage..." required />
+                </div>
+               
+                <button type="submit" class="send_message">
+                    <div class="text">Send</div>
+                </button>
+            </form>
+        </div>
+    </div>
+    <!-- <div class="message_template">
+       
+        <li class="message">
+            <div class="avatar"></div>
+            <div class="text_wrapper">
+                <div class="text"></div>
+            </div>
+        </li>
+    </div> -->
+    
+   
+
+    
+    <script>
+        $.ajax({
+            url: '/http://127.0.0.1:5000/',  // replace with your endpoint
+            method: 'POST',
+            data: {
+                url: $('#url').val(),
+                question: $('#question').val()
+            },
+            success: function(response) {
+                if (response) {
+                    $('.messages').append('<h1>Result</h1><p>' + response + '</p>');
+                }
+            }
+        });
+        $('.send_message').click(function(e) {
+            e.preventDefault();  // 防止表單提交
+            $.ajax({
+                url: 'http://127.0.0.1:5000/',  // 替換為您的端點
+                method: 'POST',
+                data: {
+                    url: $('#url').val(),
+                    question: $('#question').val()
+                },
+                success: function(response) {
+                    if (response.response) {
+                    
+
+                    // 創建一個帶有文字 'Result' 的 h1 元素
+                    var $h1 = $('<h1></h1>').text('Response');
+                    // 創建一個 li 元素來顯示回應，並給它添加 'message' 和 'left' 的 class
+                    var $li = $('<li class="message left"></li>');
+                    // 在 li 內部創建一個 'avatar' 的 div 元素
+                    var $avatar = $('<div class="avatar"></div>');
+                    // 在 'avatar' div 內部創建一個圖片元素
+                    var $img = $('<img class="bot-chat-img" src="/static/robot.png" alt="Message User Image">');
+                    // 將圖片元素附加到 'avatar' div 中
+                    $avatar.append($img);
+                    
+                    // 在 li 內部創建一個 'text_wrapper' 的 div 元素來包裹回應的文字
+                    var $text_wrapper = $('<div class="text_wrapper"></div>');
+                    // 將 'text_wrapper' div 附加到 li 中
+                    var $text = $('<div class="text"></div>').text(response.response);
+                    // 將 'text' div 附加到 'text_wrapper' div 中
+                    $text_wrapper.append($text);
+                    // 將 'text_wrapper' div 附加到 li 中
+                    $li.append($avatar,$text_wrapper);
+                    // 將 h1 和 li 元素附加到 class 為 'messages' 的 ul 中
+                    $('.messages').empty().append($h1, $li);
+                    }
+                   
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error:', textStatus, errorThrown);
+                }
+            });
+        });
+        
+    
+
+    </script>
+
+    
+
+
+
+
